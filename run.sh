@@ -6,4 +6,6 @@ if [ ! -x "$ROOT/.venv/bin/python" ]; then
   exit 1
 fi
 source "$ROOT/.venv/bin/activate"
+# COLMAP is Qt-linked even for CLI use. RunPod is headless, so force Qt offscreen.
+export QT_QPA_PLATFORM="${QT_QPA_PLATFORM:-offscreen}"
 exec python -m splat_house.pipeline "$@"
