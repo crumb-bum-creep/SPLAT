@@ -60,7 +60,7 @@ ns-export gaussian-splat --help >/dev/null
 
 python "$ROOT/splat_house/doctor.py"
 
-chmod +x "$ROOT/run.sh" "$ROOT/serve.sh" "$ROOT/doctor.sh"
+chmod +x "$ROOT/run.sh" "$ROOT/serve.sh" "$ROOT/view.sh" "$ROOT/doctor.sh"
 echo
 echo "INSTALL COMPLETE"
 echo "CLI:  $ROOT/run.sh /workspace/YOUR_VIDEO.mp4 balanced"

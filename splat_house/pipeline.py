@@ -274,8 +274,8 @@ def main(argv: list[str] | None = None) -> int:
     CONSOLE.print(f"elapsed:    {elapsed/60:.1f} min")
     CONSOLE.print(f"job:        {job.root}")
     CONSOLE.print()
-    CONSOLE.print("To inspect with Nerfstudio:")
-    CONSOLE.print(f"  ns-viewer --load-config {shlex.quote(str(config))} --viewer.websocket-host 0.0.0.0")
+    CONSOLE.print("To open the interactive viewer on RunPod port 7860:")
+    CONSOLE.print(f"  cd {shlex.quote(str(repo_root))} && ./view.sh {shlex.quote(str(job.root))}")
     CONSOLE.rule()
     return 0
 

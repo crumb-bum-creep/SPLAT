@@ -65,6 +65,22 @@ Expose port **7860** in RunPod and open it. Upload the walkthrough, leave `balan
 
 For very large source videos, putting the MP4 directly in `/workspace` first is faster than uploading through the browser; use the CLI below.
 
+## Open the finished splat interactively
+
+After a run finishes, stop the upload UI if it is still occupying port 7860, then:
+
+```bash
+cd /workspace/SPLAT && ./view.sh
+```
+
+With no argument, `view.sh` opens the newest completed job. Or target one explicitly:
+
+```bash
+cd /workspace/SPLAT && ./view.sh /workspace/SPLAT/runs/september-house
+```
+
+It binds the Nerfstudio interactive 3D viewer to **port 7860**, so you can fly around the reconstructed house from the browser instead of only downloading the `.ply`.
+
 ## CLI
 
 ```bash
