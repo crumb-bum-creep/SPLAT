@@ -105,6 +105,11 @@ def registration_ratio(dataset: Path, selected_count: int) -> tuple[float, int]:
 
 
 def process_poses(job: Job, selected_count: int, preset: dict, retry_vocab: bool = True) -> tuple[float, int, str]:
+    # Ubuntu's distro COLMAP often has the OpenGL SIFT backend but not a headless CUDA
+    # SIFT backend. Nerfstudio defaults to GPU=True, which then tries to create an
+    # OpenGL context and aborts on cloud/headless pods. CPU SIFT is slower, but for
+    # our capped keyframe sets it is reliable and keeps the RTX free for 3DGS training.
+    CONSOLE.print("[cyan]COLMAP SfM: headless-safe CPU SIFT/matching; GPU stays available for splat training.[/]")
     common = [
         "ns-process-data", "images",
         "--data", str(job.selected),
@@ -112,6 +117,7 @@ def process_poses(job: Job, selected_count: int, preset: dict, retry_vocab: bool
         "--camera-type", "perspective",
         "--matching-method", "sequential",
         "--sfm-tool", "colmap",
+        "--no-gpu",
         "--num-downscales", "2",
     ]
     run(common, job.logs / "poses-sequential.log")
@@ -132,6 +138,7 @@ def process_poses(job: Job, selected_count: int, preset: dict, retry_vocab: bool
             "--camera-type", "perspective",
             "--matching-method", "vocab_tree",
             "--sfm-tool", "colmap",
+            "--no-gpu",
             "--num-downscales", "2",
         ]
         run(retry, job.logs / "poses-vocab-tree.log")
