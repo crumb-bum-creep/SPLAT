@@ -19,9 +19,9 @@ CONSOLE = Console()
 
 PRESETS = {
     "preview": {
-        "candidate_fps": 1.4,
-        "frames_per_second_of_video": 0.34,
-        "min_frames": 500,
+        "candidate_fps": 5.0,
+        "frames_per_second_of_video": 2.5,
+        "min_frames": 450,
         "max_frames": 900,
         "max_width": 1280,
         "iterations": 7000,
